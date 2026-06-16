@@ -70,4 +70,43 @@
             @endforeach
         </div>
     </section>
+
+    <section id="contact" class="max-w-4xl mx-auto px-6 py-20">
+    <div class="bg-gray-50 p-8 md:p-12 rounded-3xl border border-gray-100">
+        <h2 class="text-3xl font-bold mb-8">Me contacter</h2>
+        <form action="#" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @csrf <div class="space-y-2">
+                <label class="text-sm font-medium">Nom</label>
+                <input type="text" class="w-full p-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-black outline-none">
+            </div>
+            
+            <div class="space-y-2">
+                <label class="text-sm font-medium">Email</label>
+                <input type="email" class="w-full p-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-black outline-none">
+            </div>
+            
+            <div class="space-y-2 md:col-span-2">
+                <label class="text-sm font-medium">Message</label>
+                <textarea rows="4" class="w-full p-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-black outline-none"></textarea>
+            </div>
+            
+            <button class="md:col-span-2 bg-black text-white py-3 rounded-xl font-medium hover:bg-gray-800 transition">
+                Envoyer le message
+            </button>
+        </form>
+    </div>
+</section>
+
+<footer class="max-w-6xl mx-auto px-6 py-12 border-t border-gray-100 mt-10">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-gray-400 text-sm">
+            &copy; {{ date('Y') }} Ibrahim. Tous droits réservés.
+        </p>
+        <div class="flex gap-6 text-sm text-gray-500">
+            <a href="#" class="hover:text-black transition">GitHub</a>
+            <a href="#" class="hover:text-black transition">LinkedIn</a>
+            <a href="#" class="hover:text-black transition">Twitter</a>
+        </div>
+    </div>
+</footer>
 @endsection
