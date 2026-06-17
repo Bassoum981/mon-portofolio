@@ -16,7 +16,11 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
-    server: {
+   server: {
+        host: '0.0.0.0', // Écoute sur tout le réseau (sorti de watch)
+        hmr: {
+            host: '192.168.1.224', // Ton IP locale (sorti de watch)
+        },
         watch: {
             ignored: ['**/storage/framework/views/**'],
         },
