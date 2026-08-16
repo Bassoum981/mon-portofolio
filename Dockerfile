@@ -20,6 +20,9 @@ RUN docker-php-ext-install pdo_mysql gd
 # Activer mod_rewrite pour Apache
 RUN a2enmod rewrite
 
+# Autoriser les overrides pour que le .htaccess fonctionne
+RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+
 # Copier les fichiers du projet
 COPY . /var/www/html
 
