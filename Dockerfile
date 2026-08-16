@@ -1,6 +1,6 @@
 FROM php:8.4-apache
 
-# Installer les dépendances système et Composer
+# Installer les dépendances système, Git, Curl et Node.js
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg62-turbo-dev \
@@ -8,7 +8,9 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     git \
-    curl
+    curl \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
 
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -28,8 +30,11 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 
 WORKDIR /var/www/html
 
-# Installer les dépendances PHP via Composer en production
+# Installer les dépendances PHP
 RUN composer install --no-dev --optimize-autoloader
+
+# Installer les dépendances Node.js et compiler les assets avec Vite
+RUN npm install && npm run build
 
 # Permissions pour Laravel
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
